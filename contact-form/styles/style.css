@@ -189,8 +189,6 @@ button:hover {
     background-color: var(--grey-900);
 }
 
-
-
 .sec-btn {
     align-items: center;
     justify-content: center;
@@ -282,7 +280,7 @@ textarea.error {
     }
 
     form {
-        width: 40%;
+        width: 30%;
         height: max-content;
     }
 
