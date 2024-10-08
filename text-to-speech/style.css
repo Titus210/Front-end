@@ -1,0 +1,79 @@
+/* import lato family google fonts */
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700,900');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    font-size: 16px;
+    min-height: 100vh;
+    width: 100vw;
+}
+
+.container {
+    width: 100%;
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn {
+    cursor: pointer;
+    background-color: orangered;
+    border:0;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 16px;
+    padding: 8px;
+}
+
+.btn:active{
+    transform: scale(0.98);
+}
+
+.btn:focus, select:focus {
+    outline: none;
+}
+
+.btn-toggle{
+    display: block;
+    margin:auto;
+    margin-bottom: 20px;
+}
+
+.text-box{
+    width: 70%;
+    background: #c9c4c4;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+
+.text-box select{
+    background-color: chocolate;
+    border:0;
+    color: #fff;
+    font-size: 12px;
+    height: 30px;
+    width: 100%;
+}
+
+.text-box textarea{
+    border: 1px #dadada solid;
+    border:12px; 
+    color: #fff;
+    font-size: 14px;
+    height: 100px;
+    width: 100%;
+    margin-top: 10px;
+}
