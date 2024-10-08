@@ -5,7 +5,7 @@
 The Text-to-Speech Reader is a web-based application that leverages Mozilla's Voice API to provide text-to-speech functionality. This project aims to make web content more accessible by enabling users to convert text into speech using a variety of voice options, controls, and interactive features.
 
 Users can select, type, or paste text and convert it to speech. The application offers interactive speech cards, allowing users to click on cards to read their content aloud. It also supports various voices and speech controls like play, pause, stop, volume adjustment, and speed control. <br>
-**Live demo**: [Text-to-Speech Reader](https://yourusername.github.io/Front-end-mentor/text-to-speech/)
+**Live demo**: [Text-to-Speech Reader](https://mozilla-text-to-speech.netlify.app/)
 ## Features
 
 - **Text-to-Speech Conversion**: Users can type or paste text in an input field and have it read aloud.
