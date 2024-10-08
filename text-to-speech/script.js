@@ -1,139 +1,81 @@
+// Get DOM elements
 const main = document.querySelector('main');
-
 const voiceSelect = document.getElementById('voices');
 const textarea = document.getElementById('text');
 const readBtn = document.getElementById('read');
 const toggleBtn = document.getElementById('toggle');
 const closeBtn = document.getElementById('close');
 
-
+// Sample data for images and text
 const data = [
-    {
-        "image": './img/drink.jpg',
-        text:"Get me some water Please. Im thirsty"
-    },
-    {
-        "image": './img/food.jpg',
-        text:"I am hungry. Get me some food"
-    },
-    {
-        "image": './img/tired.jpg',
-        text:"I am tired. I need to sleep"
-    },
-    {
-        "image": './img/hurt.jpg',
-        text:"I am hurt. I need a doctor"
-    },
-    {
-        "image": './img/happy.jpg',
-        text:"I am happy. I am feeling good"
-    },
-    {
-        "image": './img/angry.jpg',
-        text:"I am angry. I am feeling bad"
-    },
-    {
-        "image": './img/sad.jpg',
-        text:"I am sad. I am feeling bad"
-    },
-    {
-        "image": './img/scared.jpg',
-        text:"I am scared. I am feeling bad"
-    },
-    {
-        "image": './img/outside.jpg',
-        text:"I want to go outside. I want to play"
-    },
-    {
-        "image": './img/home.jpg',
-        text:"I want to go home. I want to sleep"
-    },
-    {
-        "image": './img/school.jpg',
-        text:"I want to go to school. I want to study"
-    },
-    {
-        "image": './img/grandma.jpg',
-        text:"I want to go to grandmas house. I want to play"
-    },
-]
+    { image: './img/drink.jpg', text: "Get me some water please. I'm thirsty." },
+    { image: './img/food.jpg', text: "I am hungry. Get me some food." },
+    { image: './img/tired.jpg', text: "I am tired. I need to sleep." },
+    { image: './img/hurt.jpg', text: "I am hurt. I need a doctor." },
+    { image: './img/happy.jpg', text: "I am happy. I am feeling good." },
+    { image: './img/angry.jpg', text: "I am angry. I am feeling bad." },
+    { image: './img/sad.jpg', text: "I am sad. I am feeling down." },
+    { image: './img/scared.jpg', text: "I am scared. I am feeling uneasy." },
+    { image: './img/outside.jpg', text: "I want to go outside. I want to play." },
+    { image: './img/home.jpg', text: "I want to go home. I want to rest." },
+    { image: './img/school.jpg', text: "I want to go to school. I want to study." },
+    { image: './img/grandma.jpg', text: "I want to go to grandma's house. I want to visit." }
+];
 
+// Create boxes for each image-text pair
 data.forEach(createBox);
 
-// create speech box
-function createBox(item){
-    const box = document.createElement('div');
-
-    const { image, text } = item;
-
-    box.classList.add('box');
-    box.innerHTML = `
-    <img src="${image}" alt="${text}" />
-    <p class="info">${text}</p>
-    `;
-
-    box.addEventListener('click', () => {
-        setTextMessage(text);
-        speakText();
-
-        // add active effect
-        box.classList.add('active');
-        setTimeout(() => box.classList.remove('active'), 800);
-    });
-
-    main.appendChild(box);
-}
-
-// initialize speech syntesis
+// Create a speech synthesis instance
 const message = new SpeechSynthesisUtterance();
-
-// store voices
 let voices = [];
 
-function getVoices(){
+// Get and populate available voices
+function getVoices() {
     voices = speechSynthesis.getVoices();
-
-    voices.forEach(voice => {
-        const option = document.createElement('option');
-
-        option.value = voice.name;
-        option.innerText = `${voice.name} ${voice.lang}`;
-
-        voiceSelect.appendChild(option);
-    });
+    voiceSelect.innerHTML = voices.map(voice => `<option value="${voice.name}">${voice.name} (${voice.lang})</option>`).join('');
 }
 
-// set text
-function setTextMessage(text){
+// Set the text for speech synthesis
+function setTextMessage(text) {
     message.text = text;
 }
 
-// speak text
-function speakText(){
+// Speak the text using the selected voice
+function speakText() {
     speechSynthesis.speak(message);
 }
 
-// set voice
-function setVoice(e){
+// Set the selected voice for speech synthesis
+function setVoice(e) {
     message.voice = voices.find(voice => voice.name === e.target.value);
 }
 
-// voice changed
+// Create a speech box for each item in the data
+function createBox(item) {
+    const box = document.createElement('div');
+    box.classList.add('box');
+    box.innerHTML = `
+        <img src="${item.image}" alt="${item.text}" />
+        <p class="info">${item.text}</p>
+    `;
+    box.addEventListener('click', () => {
+        setTextMessage(item.text);
+        speakText();
+        box.classList.add('active');
+        setTimeout(() => box.classList.remove('active'), 800);
+    });
+    main.appendChild(box);
+}
+
+// Event listeners
 speechSynthesis.addEventListener('voiceschanged', getVoices);
-
-// toggle text box
 toggleBtn.addEventListener('click', () => document.getElementById('text-box').classList.toggle('show'));
-
-// close button
 closeBtn.addEventListener('click', () => document.getElementById('text-box').classList.remove('show'));
-
-// change voice
 voiceSelect.addEventListener('change', setVoice);
-
-// read text button
 readBtn.addEventListener('click', () => {
     setTextMessage(textarea.value);
     speakText();
 });
 
+// Initialize voices
 getVoices();
