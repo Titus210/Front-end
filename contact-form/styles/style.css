@@ -259,15 +259,7 @@ textarea.error {
     }
 
     form {
-        width: max-content;
-    }
-
-    .query-input {
-        flex-direction: column;
-    }
-
-    .query-container {
-        flex-direction: row;
+        width: 50%;
     }
 }
 
@@ -280,16 +272,28 @@ textarea.error {
     }
 
     form {
-        width: 30%;
-        height: max-content;
+        width: 33%;
+    }
+}
+
+/* Larger screens */
+@media (min-width: 1440px) {
+    main {
+        padding: 30px;
     }
 
+    form {
+        width: 25%;
+    }
+}
+
+/* Common styles for query-input and query-container */
+@media (min-width: 768px) {
     .query-input {
         flex-direction: column;
     }
 
     .query-container {
-
         flex-direction: row;
     }
 }
